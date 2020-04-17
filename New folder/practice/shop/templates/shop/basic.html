@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {%block css%}{%endblock%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+    <style>
+      .col-md-3{
+        display: inline-block;
+        margin: 20px;
+        padding: 10px;
+    }
+    .sidenav {
+      height: 100%;
+      width: 20%;
+      position: absolute;
+      z-index: 1;
+      top: 22%;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      padding-top: 10px;
+    }
+    
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration:none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+    }
+    
+    .sidenav a:hover {
+      color: #f1f1f1;
+    }
+    footer.page-footer {
+        bottom: 0;
+        color: #fff;
+        float:right;
+        width:100%
+      }
+      .font-small {
+      font-size: .9rem;
+      }
+      
+      .stylish-color-dark {
+      background-color: #3e4551 !important;
+      }
+      .pt-4, .py-4 {
+      padding-top: 1.5rem!important;
+      }
+    .login-trigger {
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(to bottom right, #B05574, #F87E7B);
+        padding: 15px 30px;
+        border-radius: 30px;
+        position: relative; 
+        top: 50%;
+      }
+      
+      /*Modal*/
+      h4 {
+        font-weight: bold;
+        color: #fff;
+      }
+      .close {
+        color: #fff;
+        transform: scale(1.2)
+      }
+      .modal-content {
+        font-weight: bold;
+        background: linear-gradient(to bottom right,#F87E7B,#B05574);
+      }
+      .form-control {
+        margin: 1em 0;
+      }
+      .form-control:hover, .form-control:focus {
+        box-shadow: none;  
+        border-color: #fff;
+      }
+      .username, .password {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 2px solid #eee;
+        padding-left: 0;
+        font-weight: normal;
+        background: transparent;  
+      }
+      .form-control::-webkit-input-placeholder {
+        color: #eee;  
+      }
+      .form-control:focus::-webkit-input-placeholder {
+        font-weight: bold;
+        color: #fff;
+      }
+      .login {
+        padding: 6px 20px;
+        border-radius: 20px;
+        background: none;
+        border: 2px solid #FAB87F;
+        color: #FAB87F;
+        font-weight: bold;
+        transition: all .5s;
+        margin-top: 1em;
+      }
+      .login:hover {
+        background: #FAB87F;
+        color: #fff;
+      }
+       /* Full-width input fields */
+  input[type=text], input[type=password],input[type=number] {
+    width: 100%;
+    padding: 5px;
+    margin: 0px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* Add a background color when the inputs get focus */
+  input[type=text]:focus, input[type=password]:focus,input[type=number]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn, .signupbtn {
+    float: left;
+    width: 50%;
+    padding:14px 20px;
+  }
+  .container {
+    padding: 0px;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #474e5d;
+    
+  }
+  /* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+ /* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+       width: 100%;
+    }
+  }   
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: #F3EDEC;">
+  <br>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'func' %}" style="color: rgb(223, 101, 101);"><h1>Aapki Dukaan</h1></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'func' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+            </li>
+            <!--<li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Products
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>-->
+            <li class="nav-item">
+                <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
+              <div id="login" class="modal fade" role="dialog">
+                <di<v class="modal-dialog">
+                  
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <button data-dismiss="modal" class="close">&times;</button>
+                      <h4>Login</h4>
+                      <form>
+                        <input type="text" name="username" class="username form-control" placeholder="Username"/>
+                        <input type="password" name="password" class="password form-control" placeholder="password"/>
+                        <input class="btn login" type="submit" value="Login" />
+                      </form>
+                    </div>
+                  </div>
+                </div>  
+              </div>
+            </li>
+            <li>
+              <a href=""><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/facebook/230/shopping-trolley_1f6d2.png" style="height: 30%;width:30%"><span id="cart" style="color: red;font-size:x-large">0</span></a>
+          </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input id="searchbar" type="search" placeholder="Search" onkeyup="search_list" aria-label="Search">
+          </form>
+        </div>
+      </nav>
+      <!--<ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+          <li data-target="#demo" data-slide-to="3"></li>
+          <li data-target="#demo" data-slide-to="4"></li>   
+      </ul>-->
+
+      <!--side menu/navigation bar-->
+      
+      <div class="sidenav">
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'women' %}">Women's Fashion</a>
+        <a href="{% url 'women' %}">Men's Fahion</a>
+        <a href="{% url 'women' %}">Home</a>
+        <a href="{% url 'women' %}">Electrical & Electronics</a>
+        <a href="{% url 'women' %}">Beauty</a>
+        <a href="{% url 'women' %}">Sports</a>
+        <a href="{% url 'women' %}">Kitchen</a>
+        <a href="{% url 'women' %}">Pets</a>
+        <a href="{% url 'women' %}">Health</a>
+        <a href="{% url 'women' %}">Grocery</a>
+        <a href="{% url 'women' %}">Bags</a>
+        <a href="{% url 'women' %}">Gifts</a><hr style="background-color: rgb(209, 209, 209);">
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'tracker' %}">Your Order</a>
+        <a href="{% url 'help' %}">Help</a>
+      </div>
+ 
+
+    <!--body goes here-->
+    {%block body%}{%endblock%}
+
+
+   <!-- Footer -->
+   <footer class="page-footer font-small stylish-color-dark pt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+  
+      <!-- Grid row -->
+      <div class="row">
+  
+        <!-- Grid column -->
+        <div class="col-md-4 mx-auto">
+  
+          <!-- Content -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+          <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+            consectetur
+            adipisicing elit.</p>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="clearfix w-100 d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 mx-auto">
+  
+          <!-- Links -->
+          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+  
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!">Link 1</a>
+            </li>
+            <li>
+              <a href="#!">Link 2</a>
+            </li>
+            <li>
+              <a href="#!">Link 3</a>
+            </li>
+            <li>
+              <a href="#!">Link 4</a>
+            </li>
+          </ul>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+  
+    <hr>
+  
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Register for free</h5>
+      </li>
+      <li class="list-inline-item">
+        <button style=" background-color:rgb(223, 101, 101);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+  
+        <div id="id01" class="modal"  >
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <form class="modal-content" action='/shop/login' method='POST' align="center">
+            {% csrf_token %}
+            <div class="container">
+              <h2>Sign Up</h2>
+              <p>Please fill in this form to create an account.</p>
+              <hr>
+              <div style="float: left;width:47%">
+              <label for="name"><b>Name</b></label>
+              <input type="text" placeholder="Enter Name" name="name" required></div>
+
+              <div style="float: right;width:47%">     
+              <label for="phn"><b>Phone Number</b></label>
+              <input type="number" placeholder="Enter number" name="phn" required></div>
+            
+              <div style="float: left;width:47%">
+              <label for="add"><b>Address</b></label>
+              <input type="text" placeholder="Enter Address" name="add" required>
+              </div>
+
+              <div style="float: right;width:47%">
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Enter Email" name="e-mail" required>
+              </div>
+
+              <div style="float: left;width:47%">
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required>
+              </div>
+
+              <div style="float: right;width:47%">
+              <label for="psw-repeat"><b>Repeat Password</b></label>
+              <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+              </div>
+
+              <div style="float:left;width:100%">
+              <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+              </label>
+        
+              <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        
+              <div class="clearfix" align="center">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Sign Up</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        </script>
+        
+      </li>
+    </ul>
+    <!-- Call to action -->
+  
+    <hr>
+  
+    <!-- Social buttons -->
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item">
+        <a class="btn-floating btn-fb mx-1">
+          <i class="fab fa-facebook-f"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1">
+          <i class="fab fa-twitter"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-gplus mx-1">
+          <i class="fab fa-google-plus-g"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-li mx-1">
+          <i class="fab fa-linkedin-in"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-dribbble mx-1">
+          <i class="fab fa-dribbble"> </i>
+        </a>
+      </li>
+    </ul>
+    <!-- Social buttons -->
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://mdbootstrap.com/"> Aapkidukaan.com</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+  {% block js%}{%endblock%}
+  
+</body>
+</html>
